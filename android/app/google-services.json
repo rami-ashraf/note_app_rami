@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "702260376924",
+    "project_id": "note-app-rami",
+    "storage_bucket": "note-app-rami.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702260376924:android:e9ee898454824efaba3d99",
+        "android_client_info": {
+          "package_name": "com.example.note_app_rami"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk5DqSVHFvnfHv39EN4TYCbbZDmaOHpBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
