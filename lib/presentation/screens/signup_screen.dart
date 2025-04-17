@@ -1,38 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:note_app_rami/logic/Login_cubit/state.dart';
-import 'package:note_app_rami/logic/login_cubit/cubit.dart';
+import 'package:note_app_rami/logic/signup_cubit/state.dart';
 import 'package:note_app_rami/presentation/screens/home_screen.dart';
-import 'package:note_app_rami/presentation/screens/signup_screen.dart';
+import 'package:note_app_rami/presentation/screens/login_screen.dart';
 
 import '../../core/color_manager.dart';
+import '../../logic/login_cubit/cubit.dart';
+import '../../logic/signup_cubit/cubit.dart';
 
-class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  SignUpScreen({super.key});
 
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   bool secureText = true;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => LoginCubit(),
-        child: BlocConsumer<LoginCubit, LoginStates>(
+      create: (context) => SignUpCubit(),
+      child: BlocConsumer<SignUpCubit, SignUpStates>(
         listener: (context, state) {
-          if (state is LoginSucessState){
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar (content: Text("Login is Successfully")));
-          Navigator.push(context,MaterialPageRoute(builder: (context)=> HomeScreen()));
-        }else if (state is LoginErrorState){
+          if (state is SignUpSucessState){
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar (content: Text("Sign Up is Successfully")));
+            Navigator.push(context,MaterialPageRoute(builder: (context)=> HomeScreen()));
+          }else if (state is SignUpErrorState){
             ScaffoldMessenger.of(context).showSnackBar(SnackBar (content: Text(state.error)));
           }
-          },
+        },
         builder: (context, state) {
           return Scaffold(
               backgroundColor: ColorsManagers.primaryColor,
@@ -43,8 +44,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 70),
+
                         Center(
-                          child: Text("Hi, Welcome Back! ",
+                          child: Text("Create New Account",
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -109,7 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               });
                             },
                               icon: Icon(secureText == true ? Icons
-                                  .visibility_off_outlined : Icons.visibility),
+                                  .visibility_off_outlined : Icons
+                                  .visibility),
                               color: Colors.white,),
                             filled: true,
                             fillColor: ColorsManagers.textFormColor,
@@ -126,11 +129,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         SizedBox(height: 130),
 
-
-                        //login button
                         InkWell(
                           onTap: () {
-                            context.read<LoginCubit>().LoginEmailandPassword(
+                            context.read<SignUpCubit>().signUp(
                                 widget.emailcontroller.text,
                                 widget.passwordcontroller.text);
                           },
@@ -142,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
-                                  child: Text("Login",
+                                  child: Text("Sign Up",
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w700,
@@ -156,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         //login with google
                         InkWell(
                           onTap: () {
-                            context.read<LoginCubit>().contineWithGoogle();
+                            context.read<SignUpCubit>().contineWithGoogle();
                           },
                           child: Container(
                               width: double.infinity,
@@ -179,36 +180,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ],
                               )),
                         ),
-
-                        SizedBox(height: 50),
-
-
-                        //dont have an account?
-                        Padding(
-                          padding: const EdgeInsets.all(40.0),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Don't have an account ? ,",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(255, 255, 255, 1),
-                                  ),
-                                ),
-                                TextButton(onPressed: () {
-                                  Navigator.push(context,MaterialPageRoute(builder: (context)=> SignUpScreen()));
-
-                                },
-                                    child: Text("Sign Up", style:
-                                    TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromRGBO(255, 255, 255, 1),))
-                                )
-                              ]
-                          ),
-                        )
 
 
                       ]
