@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:note_app_rami/presentation/screens/create_note_screen.dart';
 import 'package:note_app_rami/presentation/screens/login_screen.dart';
 import 'package:note_app_rami/presentation/screens/signup_screen.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'note_app_rami',
-        home: LoginScreen (),
+        home: CreateNoteScreen (),
         debugShowCheckedModeBanner: false,
 
     );
