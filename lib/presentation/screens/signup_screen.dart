@@ -11,14 +11,15 @@ import '../../logic/signup_cubit/cubit.dart';
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
 
-  TextEditingController emailcontroller = TextEditingController();
-  TextEditingController passwordcontroller = TextEditingController();
+
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
   bool secureText = true;
 
   @override
@@ -70,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SizedBox(height: 8),
 
                         TextFormField(
-                          controller: widget.emailcontroller,
+                          controller: emailcontroller,
                           style: TextStyle(
                             color: Colors.white,
                           ),
@@ -98,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SizedBox(height: 8),
 
                         TextFormField(
-                          controller: widget.passwordcontroller,
+                          controller: passwordcontroller,
                           style: TextStyle(
                             color: Colors.white,
                           ),
@@ -132,8 +133,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         InkWell(
                           onTap: () {
                             context.read<SignUpCubit>().signUp(
-                                widget.emailcontroller.text,
-                                widget.passwordcontroller.text);
+                                emailcontroller.text,
+                                passwordcontroller.text);
                           },
                           child: Container(
                               width: double.infinity,
